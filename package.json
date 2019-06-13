@@ -1,0 +1,51 @@
+{
+  "name": "absol-brace",
+  "version": "0.9.5",
+  "description": "svg chart, by absol.js",
+  "main": "index.js",
+  "directories": {
+    "doc": "doc"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "webpack-dev-server --config webpack.config.js",
+    "dist": "webpack --config webpack.config.js --progress --profile --colors --mode production"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/duthienkt/absol-brace.git"
+  },
+  "keywords": [
+    "absol.js",
+    "chart",
+    "svg"
+  ],
+  "author": "Pham Quoc Du Thien",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/duthienkt/absol-brace/issues"
+  },
+  "homepage": "https://github.com/duthienkt/absol-brace#readme",
+  "dependencies": {
+    "absol": "file:../absol",
+    "absol-acomp": "file:../AComp",
+    "absol-diff": "file:../absol-diff",
+    "brace": "^0.11.1"
+  },
+  "devDependencies": {
+    "@babel/core": "7.2.2",
+    "@babel/plugin-syntax-jsx": "^7.2.0",
+    "@babel/preset-env": "7.3.1",
+    "@babel/preset-react": "^7.0.0",
+    "@babel/register": "7.0.0",
+    "babel-loader": "^8.0.6",
+    "babel-minify-webpack-plugin": "^0.3.1",
+    "css-loader": "^2.1.1",
+    "raw-loader": "^2.0.0",
+    "style-loader": "^0.23.1",
+    "uglifyjs-webpack-plugin": "^2.1.2",
+    "webpack": "^4.30.0",
+    "webpack-cli": "^3.3.0",
+    "webpack-dev-server": "^3.3.1"
+  }
+}
