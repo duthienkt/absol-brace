@@ -14,7 +14,7 @@
 
 /* Handle on hover */
 .ace_editor  ::-webkit-scrollbar-thumb:hover {
-    background: #555;
+    background: rgba(85, 85, 85, 0.445);
 }
 
 
