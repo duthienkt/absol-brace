@@ -1,14 +1,14 @@
 const path = require('path');
-const MinifyPlugin = require("babel-minify-webpack-plugin");
 
-var demo_src = process.env.DEMO;
 
 module.exports = {
     mode: process.env.MODE || "development",
-    entry: ["./index.js"],
+    entry: ["./dev.js"],
+    // entry: ["./BraceDiff/diffworker.js"],
     output: {
         path: path.join(__dirname, "."),
         filename: "./dist/absol-brace.js"
+        // filename: "./dist/diffworker.js"
     },
     resolve: {
         modules: [
@@ -31,7 +31,7 @@ module.exports = {
                 }
             },
             {
-                test: /\.(tpl|txt|xml|rels)$/i,
+                test: /\.(tpl|txt|xml|rels|svg)$/i,
                 use: 'raw-loader',
             },
             {
@@ -45,8 +45,5 @@ module.exports = {
     },
     performance: {
         hints: false
-    },
-    plugins: [
-        new MinifyPlugin()
-    ]
+    }
 };
