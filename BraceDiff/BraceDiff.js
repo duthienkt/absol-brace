@@ -91,6 +91,7 @@ BraceDiff.prototype._attachedTo = function (elt) {
 BraceDiff.prototype.edit = function (element) {
     this.$element = element.addClass('brace-diff');
     this.$element.updateSize = function () {
+        this.updateForegroundSize();
         this.updateGap(this);
     }.bind(this);
     Dom.addToResizeSystem(this.$element);
@@ -202,7 +203,8 @@ BraceDiff.prototype.pickLeft = function (trapeziume) {
         }
         this.editorRight.getSession().replace(replaceRange, newText);
     }
-}
+};
+
 /**
  * @param {Trapeziume} trapeziume
  */
@@ -394,13 +396,18 @@ BraceDiff.prototype.handleChange = function () {
         var rightData = self.editorRight.getValue();
         self.diffWorker.invoke('diffByLine', leftData, rightData).then(self.updateDiffLine.bind(self));
     }, 5);
-}
+};
 
 
 
 BraceDiff.prototype.getEditors = function () {
     return [this.editorLeft, this.editorRight];
-}
+};
 
+BraceDiff.prototype.destroy = function(){
+    this.editorLeft.destroy();
+    this.editorRight.destroy();
+    this.destroyed = true;
+};
 
 export default BraceDiff;
