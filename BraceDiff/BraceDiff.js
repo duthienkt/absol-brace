@@ -29,25 +29,28 @@ var _ = BCore._;
  *  
  * 
  *  
- * @param {BraceDiffOption} option 
+ * @param {BraceDiffOption} props 
  */
 
-function BraceDiff(option) {
-    if (!(this instanceof BraceDiff)) return new BraceDiff(option);
+function BraceDiff(props) {
+    if (!(this instanceof BraceDiff)) return new BraceDiff(props);
     EventEmitter.call(this);
     this.ready = false;
-    this._option = option;
+    this.props = props;
+    this.props.left = this.props.left || {};
+    this.props.right = this.props.right || {};
+
     this.editorLeft = null;
     this.editorRight = null;
     this.$element = null;
-    this.diffWorker = option.diffWorker;
+    this.diffWorker = props.diffWorker;
     if (!this.diffWorker) {
         var workerUrl = (URL || webkitURL).createObjectURL(new Blob([diffWorker_js_txt], { type: 'application/javascript' }));
         this.diffWorker = new IFrameBridge(new Worker(workerUrl));
     }
     this.lastFocusEditor = null;
     this._changeTimeOut = false;
-    this._attachedTo(option.element);
+    this._attachedTo(props.element);
 
 }
 
@@ -122,15 +125,19 @@ BraceDiff.prototype.edit = function (element) {
 
 BraceDiff.prototype._setupEditors = function () {
     var self = this;
-    this.editorLeft.setOptions({
-        mode: 'ace/mode/javascript'
-    });
-    this.editorRight.setOptions({
-        mode: 'ace/mode/javascript'
-    });
-
+    this.editorLeft.setOptions(Object.assign({}, this.props.option, this.props.left.option));
+    this.editorRight.setOptions(Object.assign({}, this.props.option, this.props.right.option));
+    this.editorLeft.$blockScrolling = Infinity;
+    this.editorRight.$blockScrolling = Infinity;
     this.editorLeft.on('change', this.handleChange.bind(this));
     this.editorRight.on('change', this.handleChange.bind(this));
+
+    if (this.props.left.value) {
+        this.editorLeft.setValue(this.props.left.value);
+    }
+    if (this.props.right.value) {
+        this.editorRight.setValue(this.props.right.value);
+    }
 
     this.editorLeft.getSession().on('changeScrollTop', function (scroll) {
         self.updateGap();
@@ -146,11 +153,10 @@ BraceDiff.prototype._setupEditors = function () {
     this.editorRight.on('focus', function (data) {
         self.lastFocusEditor = self.editorRight;
     });
-    this.editorLeft.focus();
-
-
-    this.editorLeft.$blockScrolling = Infinity;
-    this.editorRight.$blockScrolling = Infinity;
+    if (this.props.right.focus)
+        this.editorRight.focus();
+    else
+        this.editorLeft.focus();
 };
 
 
