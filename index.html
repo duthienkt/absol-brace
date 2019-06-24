@@ -14,7 +14,18 @@
     </style>
     <div class="test0"></div>
     <script>
-        var differ = AbsolBrace.BraceDiff({ element: '.test0' });
+        var differ = AbsolBrace.BraceDiff({
+            element: '.test0',//required
+            option: {
+                mode: 'ace/mode/javascript'
+            },
+            left: {
+                value:'function BraceDiff(props) {\r\n    if (!(this instanceof BraceDiff)) return new BraceDiff(props);\r\n    EventEmitter.call(this);\r\n    this.ready = false;\r\n    this.props = props;\r\n    this.props.left = this.props.left||{};\r\n    this.props.right = this.props.right||{};\r\n\r\n    this.editorLeft = null;\r\n    this.editorRight = null;\r\n    this.$element = null;\r\n    this.diffWorker = props.diffWorker;\r\n    if (!this.diffWorker) {\r\n        var workerUrl = (URL || webkitURL).createObjectURL(new Blob([diffWorker_js_txt], { type: \'application\/javascript\' }));\r\n        this.diffWorker = new IFrameBridge(new Worker(workerUrl));\r\n    }\r\n    this.lastFocusEditor = null;\r\n    this._changeTimeOut = false;\r\n    this._attachedTo(props.element);\r\n\r\n}'
+            },
+            right: {
+                value: 'function BraceDiff(option) {\r\n    if (!(this instanceof BraceDiff)) return new BraceDiff(option);\r\n    EventEmitter.call(this);\r\n    this.ready = false;\r\n    this._option = option;\r\n    this.editorLeft = null;\r\n    this.editorRight = null;\r\n    this.$element = null;\r\n    this.diffWorker = option.diffWorker;\r\n    if (!this.diffWorker) {\r\n        var workerUrl = (URL || webkitURL).createObjectURL(new Blob([diffWorker_js_txt], { type: \'application\/javascript\' }));\r\n        this.diffWorker = new IFrameBridge(new Worker(workerUrl));\r\n    }\r\n    this.lastFocusEditor = null;\r\n    this._changeTimeOut = false;\r\n    this._attachedTo(option.element);\r\n\r\n}'
+            }
+        });
     </script>
 
 </body>
