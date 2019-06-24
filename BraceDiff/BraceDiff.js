@@ -11,6 +11,9 @@ import '../components/Icons';
 import EventEmitter from 'absol/src/HTML5/EventEmitter';
 
 import Trapeziume from 'absol-diff/struct/Trapezium';
+import IFrameBridge from 'absol/src/Network/IFrameBridge';
+
+import diffWorker_js_txt from './diffworker.js.txt';
 
 const Range = ace.acequire('ace/range').Range;
 
@@ -38,6 +41,10 @@ function BraceDiff(option) {
     this.editorRight = null;
     this.$element = null;
     this.diffWorker = option.diffWorker;
+    if (!this.diffWorker) {
+        var workerUrl = (URL || webkitURL).createObjectURL(new Blob([diffWorker_js_txt], { type: 'application/javascript' }));
+        this.diffWorker = new IFrameBridge(new Worker(workerUrl));
+    }
     this.lastFocusEditor = null;
     this._changeTimeOut = false;
     this._attachedTo(option.element);

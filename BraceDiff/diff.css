@@ -20,7 +20,24 @@
     top: 0;
     bottom: 0;
     background: gray;
+    
+}
 
+.brace-diff-middle-tool-container{
+    position: absolute;
+    left:calc(50% - 3.5em - 19px) ;
+    right: calc(50% - 3.5em - 19px);
+    top: 0;
+    bottom: 0;
+    z-index: 9;
+    pointer-events: none;
+}
+
+.brace-diff-middle-tool{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
 }
 
 .brace-diff-left-container>pre,
@@ -28,4 +45,59 @@
     width: 100%;
     height: 100%;
     margin: 0;
+}
+
+.brace-diff-foreground {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    z-index: 7;
+    pointer-events: none;
+}
+
+.brace-diff-foreground>svg {
+    /*todo*/
+    margin: 0;
+    pointer-events: none;
+}
+
+path.brace-diff-gap{
+    fill:rgba(9, 205, 231, 0.1);
+    stroke:rgba(8, 73, 82, 0.5);
+    stroke-width: 1;
+}
+
+button.brace-diff-arrow{
+    height: 14px;
+    width: 19px; 
+    padding: 0;
+    position: absolute;
+    outline: none;
+    border: solid 1px rgba(169, 169, 169,1); 
+    background-color: white;
+    pointer-events: all;
+    
+}
+
+button.brace-diff-arrow.pick-left{
+    left: 0;
+}
+
+button.brace-diff-arrow.pick-left >svg{
+    fill:rgb(226, 35, 35);
+}
+
+button.brace-diff-arrow.pick-right >svg{
+    fill:rgb(35, 134, 226);
+}
+
+button.brace-diff-arrow.pick-right{
+    right: 0;
+}
+
+button.brace-diff-arrow> svg{
+    height:  12px;
+    width: 12px;
 }
