@@ -177,10 +177,15 @@ BraceDiff.prototype.pickLeft = function (trapeziume) {
         this.editorRight.getSession().remove(removeRange);
     }
     else {
-        var replaceRange = new Range(trapeziume.right.start, 0, trapeziume.right.end - 1, Number.MAX_VALUE);
         var newText = newTextLines.join('\n');
+        var replaceRange = new Range(trapeziume.right.start, 0, trapeziume.right.end - 1, Number.MAX_VALUE);
         if (trapeziume.right.start >= this.diffData.rLines.length) {
             newText = '\n' + newText;//newLine
+        }
+        else if (newText.length == 0 && trapeziume.right.start == trapeziume.right.end) {
+            replaceRange = new Range(trapeziume.right.start, 0, trapeziume.right.end, 0);
+            newText = '\n'
+
         }
         this.editorRight.getSession().replace(replaceRange, newText);
     }
@@ -208,8 +213,11 @@ BraceDiff.prototype.pickRight = function (trapeziume) {
         var replaceRange = new Range(trapeziume.left.start, 0, trapeziume.left.end - 1, Number.MAX_VALUE);
         var newText = newTextLines.join('\n');
         if (trapeziume.left.start >= this.diffData.lLines.length) {
-            console.log('add line')
             newText = '\n' + newText;//newLine
+        }
+        else if (newText.length == 0 && trapeziume.left.start == trapeziume.left.end) {
+            replaceRange = new Range(trapeziume.left.start, 0, trapeziume.left.end, 0);
+            newText = '\n';
         }
         this.editorLeft.getSession().replace(replaceRange, newText);
     }
