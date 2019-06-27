@@ -308,6 +308,7 @@ BraceDiff.prototype.iniGap = function () {
 
             //left
             var $pickLeftBtn;
+            var $pickRightBtn;
             if (self.$poolLeftArrowBtn.length > 0) {
                 $pickLeftBtn = self.$poolLeftArrowBtn.pop();
             }
@@ -320,10 +321,12 @@ BraceDiff.prototype.iniGap = function () {
             trp.$pickLeftBtn = $pickLeftBtn;
             $pickLeftBtn.onclick = function () {
                 self.pickLeft(trp);
+                $gap.remove();
+                $pickLeftBtn.remove();
+                $pickRightBtn.remove();
             }
 
             //right
-            var $pickRightBtn;
             if (self.$poolRightArrowBtn.length > 0) {
                 $pickRightBtn = self.$poolRightArrowBtn.pop();
             }
@@ -336,6 +339,9 @@ BraceDiff.prototype.iniGap = function () {
             trp.$pickRightBtn = $pickRightBtn;
             $pickRightBtn.onclick = function () {
                 self.pickRight(trp);
+                $gap.remove();
+                $pickLeftBtn.remove();
+                $pickRightBtn.remove();
             }
         }
     });
@@ -391,10 +397,18 @@ BraceDiff.prototype.handleChange = function () {
     }
     var self = this;
     this._changeTimeOut = setTimeout(function () {
+        var currentSession = Math.random();
+        self._workSession = currentSession;
+        if (self._inWorking) return;
+        self._inWorking = true;
         self._changeTimeOut = false;
         var leftData = self.editorLeft.getValue();
         var rightData = self.editorRight.getValue();
-        self.diffWorker.invoke('diffByLine', leftData, rightData).then(self.updateDiffLine.bind(self));
+        self.diffWorker.invoke('diffByLine', leftData, rightData).then(function(result){
+            self.updateDiffLine(result);
+            self._inWorking = false;
+            if (currentSession != self._workSession) self.handleChange();
+        });
     }, 5);
 };
 
