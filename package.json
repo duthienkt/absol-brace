@@ -1,6 +1,6 @@
 {
   "name": "absol-brace",
-  "version": "0.9.0",
+  "version": "0.9.1",
   "description": "svg chart, by absol.js",
   "main": "index.js",
   "directories": {
