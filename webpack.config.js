@@ -3,7 +3,10 @@ const path = require('path');
 
 module.exports = {
     mode: process.env.MODE || "development",
-    entry: ["./dev.js"],
+    entry: [
+        "./dependents.js",
+        "./dev.js"
+    ],
     // entry: ["./BraceDiff/diffworker.js"],
     output: {
         path: path.join(__dirname, "."),

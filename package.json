@@ -28,7 +28,7 @@
   },
   "homepage": "https://github.com/duthienkt/absol-brace#readme",
   "dependencies": {
-    "absol": "^1.9.9",
+    "absol": "^1.16.0",
     "absol-acomp": "^0.8.4",
     "absol-diff": "^0.1.1",
     "brace": "^0.11.1"
