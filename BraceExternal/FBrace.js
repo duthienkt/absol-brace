@@ -4,7 +4,7 @@ import './ace.css';
 import FBraceEditor from './FBraceEditor';
 import FEditSession from './FEditSession';
 
-var aceEdit = ace.edit;
+var aceEdit = ace && ace.edit;
 
 ace.edit = function(){
     var editor = aceEdit.apply(this, arguments);

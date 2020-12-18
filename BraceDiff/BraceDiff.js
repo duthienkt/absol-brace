@@ -15,7 +15,7 @@ import IFrameBridge from 'absol/src/Network/IFrameBridge';
 
 import diffWorker_js_txt from './diffworker.js.txt';
 
-const Range = ace.acequire('ace/range').Range;
+const Range = ace && ace.acequire('ace/range').Range;
 
 var $ = BCore.$;
 var _ = BCore._;
