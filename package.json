@@ -9,7 +9,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "webpack-dev-server --config webpack.config.js",
-    "dist": "webpack --config webpack.config.js --progress --profile --colors --mode production"
+    "dist": "webpack --config webpack.config.js --progress --profile --colors --mode production",
+    "dependents": "webpack --config webpack.config.js --progress --profile --colors --mode production"
   },
   "repository": {
     "type": "git",
@@ -28,8 +29,8 @@
   },
   "homepage": "https://github.com/duthienkt/absol-brace#readme",
   "dependencies": {
-    "absol": "^1.16.0",
-    "absol-acomp": "^0.8.4",
+    "absol": "^1.16.1",
+    "absol-acomp": "^0.9.56",
     "absol-diff": "^0.1.1",
     "brace": "^0.11.1"
   },
