@@ -14,5 +14,6 @@ import 'brace/mode/typescript';
 import 'brace/mode/jsx';
 import 'brace/mode/plain_text';
 import 'brace/mode/powershell';
+import 'brace/ext/language_tools';
 
 window.ace = ace;

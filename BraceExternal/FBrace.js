@@ -1,8 +1,7 @@
 import './ace.css';
-
-
 import FBraceEditor from './FBraceEditor';
 import FEditSession from './FEditSession';
+var ace = window.ace ||{};
 
 var aceEdit = ace && ace.edit;
 
