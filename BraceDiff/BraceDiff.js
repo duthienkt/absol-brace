@@ -59,7 +59,6 @@ BraceDiff.prototype.constructor = BraceDiff;
 
 
 BraceDiff.prototype._attachedTo = function (elt) {
-    var _this = this;
     if (typeof elt == 'string') {
         elt = $(elt);
         if (elt) {
@@ -71,15 +70,8 @@ BraceDiff.prototype._attachedTo = function (elt) {
 
     }
     else if (Dom.isDomNode(elt)) {
-        if ($(elt).isDescendantOf(document.body)) {
-            this.edit(elt);
-        }
-        else {
-            _('attachhook').on('error', function (event) {
-                this.remove();
-                _this.edit(elt);
-            }).addTo(elt);
-        }
+        $(elt);
+        this.edit(elt);
     }
     else
         throw new Error('Invalid element');
@@ -103,8 +95,8 @@ BraceDiff.prototype.edit = function (element) {
     this._rightPreId = randomIdent(20);
     this.$leftPre = _('pre.brace-diff-left#' + this._leftPreId).addTo(this.$leftPreCtn);
     this.$rightPre = _('pre.brace-diff-left#' + this._rightPreId).addTo(this.$rightPreCtn);
-    this.editorLeft = ace.edit(this._leftPreId);
-    this.editorRight = ace.edit(this._rightPreId);
+    this.editorLeft = ace.edit( this.$leftPre );
+    this.editorRight = ace.edit(this.$rightPre);
     this.$foreGround = _('.brace-diff-foreground').addTo(this.$element);
 
     this.$canvas = _('svg').addTo(this.$foreGround);
@@ -134,10 +126,10 @@ BraceDiff.prototype._setupEditors = function () {
     this.editorRight.on('change', this.handleChange.bind(this));
 
     if (this.props.left.value) {
-        this.editorLeft.setValue(this.props.left.value);
+        this.editorLeft.setValue(this.props.left.value, true);
     }
     if (this.props.right.value) {
-        this.editorRight.setValue(this.props.right.value);
+        this.editorRight.setValue(this.props.right.value, true);
     }
 
     this.editorLeft.getSession().on('changeScrollTop', function (scroll) {

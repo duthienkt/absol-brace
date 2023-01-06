@@ -1,4 +1,3 @@
-import 'absol/src/dependents';
 import ace from 'brace';
 import 'brace/mode/javascript';
 import 'brace/mode/php';
@@ -15,5 +14,6 @@ import 'brace/mode/jsx';
 import 'brace/mode/plain_text';
 import 'brace/mode/powershell';
 import 'brace/ext/language_tools';
+import 'brace/ext/searchbox';
 
 window.ace = ace;
