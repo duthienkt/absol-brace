@@ -22,3 +22,17 @@
     scrollbar-color:  rgba(169, 169, 169, 0.3) rgba(169, 169, 169, 0.1);
 }
 
+
+.ace_window_box .as-flexicon-button:focus{
+    box-shadow: 0 0  2px 2px rgba(95,173,217,0.79);
+    -webkit-box-shadow: 0 0  2px 2px rgba(95,173,217,0.79);
+    -moz-box-shadow: 0 0 2px 2px rgba(95,173,217,0.79);
+}
+
+
+.ace_window_box .material-icons.close{
+    font-size: 1em;
+}
+.ace_window_box .material-icons.close:hover{
+    color: red;
+}

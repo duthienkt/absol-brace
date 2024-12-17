@@ -6,7 +6,6 @@ import { randomIdent } from 'absol/src/String/stringGenerate';
 
 import './diff.css'
 
-import '../components/Shape';
 import '../components/Icons';
 import EventEmitter from 'absol/src/HTML5/EventEmitter';
 
@@ -14,6 +13,7 @@ import Trapeziume from 'absol-diff/struct/Trapezium';
 import IFrameBridge from 'absol/src/Network/IFrameBridge';
 
 import diffWorker_js_txt from './diffworker.js.txt';
+import Thread from "absol/src/Network/Thread";
 
 const Range = ace && ace.acequire('ace/range').Range;
 
@@ -43,6 +43,7 @@ function BraceDiff(props) {
     this.editorLeft = null;
     this.editorRight = null;
     this.$element = null;
+    this.diffThread = new Thread({});
     this.diffWorker = props.diffWorker;
     if (!this.diffWorker) {
         var workerUrl = (URL || webkitURL).createObjectURL(new Blob([diffWorker_js_txt], { type: 'application/javascript' }));
@@ -396,7 +397,9 @@ BraceDiff.prototype.handleChange = function () {
         self._changeTimeOut = false;
         var leftData = self.editorLeft.getValue();
         var rightData = self.editorRight.getValue();
+        console.log(leftData, rightData)
         self.diffWorker.invoke('diffByLine', leftData, rightData).then(function(result){
+            console.log('result')
             self.updateDiffLine(result);
             self._inWorking = false;
             if (currentSession != self._workSession) self.handleChange();

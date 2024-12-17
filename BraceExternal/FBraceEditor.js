@@ -1,6 +1,9 @@
 import BCore from "../components/BCore";
 import { isDomNode } from "absol/src/HTML5/Dom";
-var ace = window.ace ||{};
+import './ext/goto';
+import { GoToCommand } from "./ext/goto";
+
+var ace = window.ace || {};
 var aceEdit = ace && ace.edit;
 
 ace.edit = function () {
@@ -19,6 +22,7 @@ function newExtendedEditor(props) {
     var editor = aceEdit.apply(ace, [element]);
     Object.defineProperties(editor, Object.getOwnPropertyDescriptors(FBraceEditor.prototype));
     FBraceEditor.call(editor, props);
+    dispatchEvent(new Event('resize'));
     return editor;
 }
 
@@ -30,6 +34,10 @@ function FBraceEditor(props) {
         enableSnippets: true,
         enableLiveAutocompletion: false
     }, props.option));
+    this.commands.addCommand(GoToCommand);
+    this.container.addEventListener('keydown', event=>{
+        if (event.key === 'Alt') event.preventDefault()
+    });
 }
 
 FBraceEditor.prototype.isFBraceEditor = true;

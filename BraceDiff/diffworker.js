@@ -4,6 +4,7 @@ import * as Diff from 'absol-diff';
 
 var brige = IFrameBridge.getInstance();
 brige.diffByLine = function (a, b) {
+    console.log(a, b);
     return Diff.diffByLineText(a, b);
 }
 
